@@ -1,9 +1,10 @@
 import './App.css';
+import Title from './title/containers/Title'
 
 const App = () => {
   return (
     <div className="App">
-      <h1 className='Title_body'>REACT를 이용한 메신저 프로젝트</h1>
+      <Title />
     </div>
   );
 }
