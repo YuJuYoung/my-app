@@ -5,3 +5,8 @@
     padding-top: 20px;
     padding-bottom: 20px;
 }
+
+.grid {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+}
