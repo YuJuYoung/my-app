@@ -4,7 +4,7 @@ import LoginForm from '../components/LoginForm'
 export default connect((state) => {
     return {
         onSubmit: (id, pwd) => {
-            fetch('/login', {
+            fetch('/users/login', {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json'
@@ -13,8 +13,10 @@ export default connect((state) => {
                     id: id,
                     password: pwd
                 })
-            }).then(json => {
-                alert(json.message)
+            }).then(res => {
+                res.json().then(json => {
+                    alert(json.message)
+                })
             })
         }
     }
