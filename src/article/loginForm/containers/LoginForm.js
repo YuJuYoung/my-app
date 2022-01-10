@@ -15,7 +15,11 @@ export default connect((state) => {
                 })
             }).then(res => {
                 res.json().then(json => {
-                    alert(json.message)
+                    if (json.result) {
+                        state.article.toggleLoginState(state.article)
+                    } else {
+                        alert(json.message)
+                    }
                 })
             })
         }
