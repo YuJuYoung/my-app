@@ -7,12 +7,11 @@ router.post('/login', (req, res) => {
     if (req.body.id === user.id && req.body.password === user.password) {
         res.json({
             result: true,
-            message: '성공'
         })
     } else {
         res.json({
             result: false,
-            message: '실패'
+            message: '아이디 혹은 비밀번호 오류'
         })
     }
 })
