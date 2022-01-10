@@ -6,8 +6,8 @@ export const articleSlice = createSlice({
         logined: false
     },
     reducers: {
-        toggleLoginState: (state) => {
-            state.logined = true ? false : true;
+        toggleLoginState: state => {
+            state.logined = !state.logined;
         }
     }
 })

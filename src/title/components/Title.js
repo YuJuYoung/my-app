@@ -1,7 +1,11 @@
+import { useSelector } from "react-redux";
+
 const Title = (props) => {
+    const title = useSelector(props.getTitle);
+
     return (
         <div className='Title'>
-            <h1 className='title'>{props.title}</h1>
+            <h1 className='title'>{title}</h1>
         </div>
     )
 }

@@ -1,10 +1,8 @@
 import { connect } from 'react-redux'
 import Title from '../components/Title'
 
-const mapStateToProps = (state) => {
+export default connect(state => {
     return {
-        title: state.title.value
+        getTitle: state => state.title.value
     }
-}
-
-export default connect(mapStateToProps)(Title)
+})(Title)

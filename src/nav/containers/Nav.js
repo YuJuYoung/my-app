@@ -1,10 +1,8 @@
 import { connect } from 'react-redux'
 import Nav from '../components/Nav'
 
-const mapStateToProps = (state) => {
+export default connect((state) => {
     return {
-        items: state.nav.items
+        getItems: state => state.nav.items
     }
-}
-
-export default connect(mapStateToProps)(Nav)
+})(Nav)

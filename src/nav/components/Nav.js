@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const Nav = (props) => {
-    const list = props.items.map(item =>
+    const items = useSelector(props.getItems);
+    const list = items.map(item =>
         <li key={item.value}>
             <Link to={item.path}>{item.value}</Link>
         </li>

@@ -1,9 +1,10 @@
 import { connect } from 'react-redux'
 import LoginForm from '../components/LoginForm'
+import { toggleLoginState } from '../../articleSlice'
 
 export default connect((state) => {
     return {
-        onSubmit: (id, pwd) => {
+        onSubmit: (id, pwd, dispatch) => {
             fetch('/users/login', {
                 method: 'post',
                 headers: {
@@ -16,7 +17,7 @@ export default connect((state) => {
             }).then(res => {
                 res.json().then(json => {
                     if (json.result) {
-                        state.article.toggleLoginState(state.article)
+                        dispatch(toggleLoginState())
                     } else {
                         alert(json.message)
                     }
