@@ -1,4 +1,5 @@
 import LoginForm from "../loginForm/containers/LoginForm"
+import ChatList from "../chatList/containers/ChatList"
 import { useSelector } from 'react-redux'
 
 const Article = (props) => {
@@ -6,11 +7,7 @@ const Article = (props) => {
 
     return (
         <div className='Article'>
-            {
-                logined
-                ? <h2>ㅇㅅㅇ!</h2>
-                : <LoginForm />
-            }
+            {logined ? <ChatList /> : <LoginForm />}
         </div>
     )
 }
