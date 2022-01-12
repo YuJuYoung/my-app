@@ -6,11 +6,11 @@ export default connect((state) => {
         chats: [
             {
                 id: 1,
-                users: ['오징어', '만두', '감자리', '김'],
+                title: 'ㅇㅅㅇ!!!',
             },
             {
                 id: 2,
-                users: ['고로롱', '김부식', '로로롱', '귀찮맨']
+                title: 'ㅇㅅㅇ?!!!'
             }
         ]
     }
