@@ -7,7 +7,7 @@ export const titleSlice = createSlice({
     },
     reducers: {
         setTitle: (state, action) => {
-            state.value = action.value
+            state.value = action.payload.value
         }
     }
 })

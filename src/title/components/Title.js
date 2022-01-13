@@ -1,7 +1,5 @@
-import { useSelector } from "react-redux";
-
 const Title = (props) => {
-    const title = useSelector(props.getTitle);
+    const title = props.title;
 
     return (
         <div className='Title'>

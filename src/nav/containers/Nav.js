@@ -4,8 +4,8 @@ import { setLoginState } from '../../article/articleSlice'
 
 export default connect(state => {
     return {
-        getItems: state => state.nav.items,
-        getLoginState: state => state.article.logined_id
+        items: state.nav.items,
+        logined: state.article.logined_id
     }
 }, dispatch => {
     return {

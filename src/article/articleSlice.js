@@ -8,9 +8,11 @@ export const articleSlice = createSlice({
     },
     reducers: {
         setLoginState: (state, action) => {
-            if (action.payload.type === 'LOGIN') {
-                state.logined_id = action.payload.id;
-                state.logined_nickname = action.payload.nickname;
+            var payload = action.payload;
+
+            if (payload.type === 'LOGIN') {
+                state.logined_id = payload.id;
+                state.logined_nickname = payload.nickname;
             } else {
                 state.logined_id = null;
                 state.logined_nickname = null;

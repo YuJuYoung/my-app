@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 
 const Nav = (props) => {
-    const items = useSelector(props.getItems);
-    const logined = useSelector(props.getLoginState);
+    const items = props.items;
+    const logined = props.logined;
 
     const list = items.map(item =>
         <li key={item.value}>

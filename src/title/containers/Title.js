@@ -3,6 +3,6 @@ import Title from '../components/Title'
 
 export default connect(state => {
     return {
-        getTitle: state => state.title.value
+        title: state.title.value
     }
 })(Title)
