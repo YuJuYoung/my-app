@@ -1,23 +1,27 @@
 import { connect } from 'react-redux'
 import LoginForm from '../components/LoginForm'
-import { toggleLoginState } from '../../articleSlice'
+import { setLoginState } from '../../articleSlice'
 
-export default connect((state) => {
+export default connect(null, dispatch => {
     return {
-        onSubmit: (id, pwd, dispatch) => {
+        onSubmit: (email, pwd) => {
             fetch('/users/login', {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    id: id,
+                    email: email,
                     password: pwd
                 })
             }).then(res => {
                 res.json().then(json => {
                     if (json.result) {
-                        dispatch(toggleLoginState())
+                        dispatch(setLoginState({
+                            type: 'LOGIN',
+                            id: json.id,
+                            nickname: json.nickname
+                        }))
                     } else {
                         alert(json.message)
                     }
