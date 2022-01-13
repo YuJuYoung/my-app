@@ -1,4 +1,4 @@
-import LoginForm from "../loginForm/containers/LoginForm"
+import LoginForm from "../user/login/containers/LoginForm"
 import ChatList from "../chatList/containers/ChatList"
 
 const Article = (props) => {

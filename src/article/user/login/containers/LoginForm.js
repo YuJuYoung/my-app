@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import LoginForm from '../components/LoginForm'
-import { setLoginState } from '../../articleSlice'
+import { setLoginState } from '../../../articleSlice'
 
 export default connect(null, dispatch => {
     return {
