@@ -10,11 +10,16 @@ const Nav = (props) => {
         </li>
     )
 
+    const logout = (e) => {
+        e.preventDefault();
+        props.logout();
+    }
+
     return (
         <div className='Nav'>
             {
                 logined
-                ? <button onClick={e => props.logout()}>로그아웃</button>
+                ? <button onClick={e => logout(e)}>로그아웃</button>
                 : null
             }
             <ul>{list}</ul>

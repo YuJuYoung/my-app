@@ -5,6 +5,9 @@ const db = require('../db')
 
 router.post('/login', (req, res) => {
     db.query('SELECT * FROM user WHERE email=?', [req.body.email], (err, user) => {
+        if (err) {
+            return next(err);
+        }
         var user = user[0];
 
         if (user && user.password === req.body.password) {
@@ -20,6 +23,21 @@ router.post('/login', (req, res) => {
             })
         }
     })
+})
+
+router.post('create', (req, res) => {
+    db.query(
+        'INSERT INTO user (email, password, nickname) VALUES ("?", "?", "?")',
+        [req.body.email, req.body.password, req.body.nickname],
+        (err, result) => {
+            if (err) {
+                return next(err)
+            }
+            res.json({
+                result: true
+            })
+        }
+    )
 })
 
 module.exports = router;
