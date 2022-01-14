@@ -1,5 +1,5 @@
 import LoginForm from "../user/login/containers/LoginForm"
-import ChatList from "../chatList/containers/ChatList"
+import ChatList from "../chat/list/containers/ChatList"
 import CreateForm from '../user/create/containers/CreateForm'
 import { Routes, Route } from "react-router-dom"
 
