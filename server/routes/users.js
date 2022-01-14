@@ -25,9 +25,9 @@ router.post('/login', (req, res) => {
     })
 })
 
-router.post('create', (req, res) => {
+router.post('/create', (req, res) => {
     db.query(
-        'INSERT INTO user (email, password, nickname) VALUES ("?", "?", "?")',
+        'INSERT INTO user (email, password, nickname) VALUES (?, ?, ?)',
         [req.body.email, req.body.password, req.body.nickname],
         (err, result) => {
             if (err) {

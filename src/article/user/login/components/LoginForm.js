@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 const LoginForm = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -14,6 +16,7 @@ const LoginForm = (props) => {
                 <input type="password" name="pwd" placeholder="패스워드 입력" /><br />
                 <input type="submit" value="로그인" />
             </form>
+            <Link to="/users/create">회원가입</Link>
         </div>
     )
 }

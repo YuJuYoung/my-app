@@ -25,4 +25,4 @@ export default connect(null, dispatch => {
             })
         }
     }
-})()
+})(CreateForm)
