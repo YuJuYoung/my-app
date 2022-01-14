@@ -1,6 +1,4 @@
 const CreateForm = (props) => {
-    var history = useHistory();
-
     const handelSubmit = (e) => {
         e.preventDefault();
 
