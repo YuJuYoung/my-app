@@ -11,10 +11,14 @@ router.post('/login', (req, res) => {
         var user = user[0];
 
         if (user && user.password === req.body.password) {
-            res.json({
-                result: true,
-                id: user.id,
-                nickname: user.nickname
+            req.session.logined_id = user.id;
+
+            req.session.save(() => {
+                res.json({
+                    result: true,
+                    id: user.id,
+                    nickname: user.nickname
+                })
             })
         } else {
             res.json({
