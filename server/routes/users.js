@@ -29,6 +29,16 @@ router.post('/login', (req, res) => {
     })
 })
 
+router.get('/logout', (req, res) => {
+    req.session.logined_id = null;
+
+    req.session.save(() => {
+        res.json({
+            result: true
+        })
+    })
+})
+
 router.post('/create', (req, res) => {
     db.query(
         'INSERT INTO user (email, password, nickname) VALUES (?, ?, ?)',
