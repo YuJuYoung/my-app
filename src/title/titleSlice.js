@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const titleSlice = createSlice({
     name: 'title',
     initialState: {
-        value: '메신저 프로젝트'
+        value: '쇼핑몰 프로젝트'
     },
     reducers: {
         setTitle: (state, action) => {
