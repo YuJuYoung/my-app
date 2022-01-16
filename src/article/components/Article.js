@@ -1,11 +1,12 @@
-import User from '../user/components/User'
+import User from '../user/containers/User'
+import Deal from '../deal/containers/Deal'
 
 const Article = (props) => {
     const logined = props.logined
 
     return (
         <div className='Article'>
-            {logined ? null : <User />}
+            {logined ? <Deal /> : <User />}
         </div>
     )
 }
