@@ -1,4 +1,4 @@
-const DealList = (props) => {
+const PostList = (props) => {
     var list = props.list.map(item => {
         return (
             <p key={item.id}>{item.title}</p>
@@ -6,10 +6,10 @@ const DealList = (props) => {
     })
 
     return (
-        <div className="DealList">
+        <div className="PostList">
             {list}
         </div>
     )
 }
 
-export default DealList
+export default PostList

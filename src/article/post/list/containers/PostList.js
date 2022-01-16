@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
-import DealList from '../components/DealList'
+import PostList from '../components/PostList'
 
 export default connect(state => {
     return {
         list: null
     }
-})(DealList);
+})(PostList);
