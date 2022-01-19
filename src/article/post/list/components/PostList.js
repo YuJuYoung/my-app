@@ -9,7 +9,11 @@ const PostList = (props) => {
 
     return (
         <div className="PostList">
-            <Link to="/posts/create">글쓰기</Link>
+            {
+                props.logined
+                ? <Link to="/posts/create">글쓰기</Link>
+                : null
+            }
             {list}
         </div>
     )
