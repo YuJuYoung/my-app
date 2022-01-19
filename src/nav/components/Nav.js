@@ -20,7 +20,7 @@ const Nav = (props) => {
             {
                 logined
                 ? <button onClick={e => logout(e)}>로그아웃</button>
-                : null
+                : <Link to="/users/login">로그인</Link>
             }
             <ul>{list}</ul>
         </div>

@@ -6,8 +6,8 @@ const User = (props) => {
     return (
         <div className="User">
             <Routes>
-                <Route path="/" element={<LoginForm />}/>
-                <Route path="/users/login" element={<CreateForm />}/>
+                <Route path="/login" element={<LoginForm />}/>
+                <Route path="/create" element={<CreateForm />}/>
             </Routes>
         </div>
     )

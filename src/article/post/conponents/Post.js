@@ -7,7 +7,7 @@ const Post = (props) => {
         <div className="Post">
             <Routes>
                 <Route path="/" element={<PostList />}/>
-                <Route path="/posts/create" element={<CreateForm />}/>
+                <Route path="/create" element={<CreateForm />}/>
             </Routes>
         </div>
     )

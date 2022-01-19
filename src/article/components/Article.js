@@ -1,12 +1,15 @@
 import User from '../user/containers/User'
 import Post from '../post/containers/Post'
+import { Routes, Route } from 'react-router-dom'
 
 const Article = (props) => {
-    const logined = props.logined
-
     return (
         <div className='Article'>
-            {logined ? <Post /> : <User />}
+            <Routes>
+                <Route exac path="/" element={<div className='default'>ㅇㅅㅇ</div>}/>
+                <Route path="/posts/*" element={<Post />}/>
+                <Route path="/users/*" element={<User />}/>
+            </Routes>
         </div>
     )
 }
