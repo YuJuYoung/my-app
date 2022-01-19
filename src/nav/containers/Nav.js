@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
 import Nav from '../components/Nav'
-import { setLoginState } from '../../article/articleSlice'
+import { setLoginState } from '../../article/user/userSlice'
 
 export default connect(state => {
     return {
         items: state.nav.items,
-        logined: state.article.logined_id
+        logined: state.user.logined_id
     }
 }, dispatch => {
     return {

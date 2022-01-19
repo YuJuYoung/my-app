@@ -3,7 +3,7 @@ import CreateForm from '../components/CreateForm'
 
 export default connect(null, dispatch => {
     return {
-        onSubmit: () => {
+        onSubmit: (title, desc, tag) => {
             
         }
     }

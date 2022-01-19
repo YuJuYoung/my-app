@@ -4,8 +4,8 @@ export const navSlice = createSlice({
     name: 'nav',
     initialState: {
         items: [
-            { value: 'ㅇㅅㅇ1', path: '/ddd1' },
-            { value: 'ㅇㅅㅇ2', path: '/ddd2' }
+            { value: '글 목록', path: '/posts' },
+            { value: '유저 목록', path: '/users' }
         ]
     },
     reducers: {

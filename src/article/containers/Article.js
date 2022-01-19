@@ -3,6 +3,6 @@ import Article from '../components/Article'
 
 export default connect((state) => {
     return {
-        logined: state.article.logined_id
+        logined: state.user.logined_id
     }
 })(Article)
