@@ -2,10 +2,17 @@ const CreateForm = (props) => {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        var title = e.target.title.value
-        var desc = e.target.title.desc
-        var tag = e.target.title.tag
-        props.onSubmit(title, desc, tag)
+        var logined_id = props.logined_id;
+
+        if (!logined_id) {
+            alert("로그인 되어있지 않음")
+        } else {
+            var title = e.target.title.value
+            var desc = e.target.desc.value
+            var tag = e.target.tag.value
+    
+            props.onSubmit(title, desc, tag, logined_id)
+        }
     }
 
     return (

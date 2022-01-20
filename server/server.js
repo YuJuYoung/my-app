@@ -26,8 +26,10 @@ app.use(session({
 }))
 
 var userRouter = require('./routes/users');
+var postRouter = require('./routes/posts')
 
 app.use('/users', userRouter);
+app.use('/posts', postRouter);
 
 app.use((req, res, next) => {
   res.status(404).send('Sorry cant find that!')
