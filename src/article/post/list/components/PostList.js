@@ -1,9 +1,19 @@
 import { Link } from 'react-router-dom'
 
 const PostList = (props) => {
-    var list = props.list == null ? null : props.list.map(item => {
+    if (!props.list) {
+        props.initPostList()
+    }
+
+    var list =
+        !props.list
+        ? <div>ㄱㄷ</div>
+        : props.list.map(post => {
         return (
-            <p key={item.id}>{item.title}</p>
+            <p key={post.id}>
+                <Link to={"/posts/" + post.id}>{post.title}</Link>
+                <br />{post.tag}
+            </p>
         )
     })
 

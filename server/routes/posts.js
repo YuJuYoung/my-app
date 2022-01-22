@@ -2,6 +2,17 @@ const express = require('express')
 const router = express.Router()
 const db = require('../db')
 
+router.get('/list', (req, res) => {
+    db.query('SELECT id, title, tag FROM post', (err, result) => {
+        if (err) {
+            return next(err)
+        }
+        res.json({
+            list: result
+        })
+    })
+})
+
 router.post('/create', (req, res) => {
     if (!req.session.logined_id) {
         res.json({
@@ -17,7 +28,7 @@ router.post('/create', (req, res) => {
     }
 
     db.query(
-        'INSERT INTO post (title, desc, tag, user_id) VAULES (?, ?, ?, ?)',
+        'INSERT INTO post (title, description, tag, user_id) VALUES (?, ?, ?, ?)',
         [req.body.title, req.body.desc, req.body.tag, req.body.logined_id],
         (err, result) => {
             if (err) {
