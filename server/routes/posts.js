@@ -13,6 +13,17 @@ router.get('/list', (req, res) => {
     })
 })
 
+router.get('/:postId', (req, res) => {
+    db.query('SELECT * FROM post WHERE id=?', [req.params.postId], (err, result) => {
+        if (err) {
+            return next(err)
+        }
+        res.json({
+            result: result[0]
+        })
+    })
+})
+
 router.post('/create', (req, res) => {
     if (!req.session.logined_id) {
         res.json({
