@@ -1,15 +1,26 @@
 import { Link } from 'react-router-dom'
 
 const PostList = (props) => {
-    if (!props.list) {
+    var list = props.list
+
+    if (!list) {
         props.initPostList()
     }
 
-    var list =
-        !props.list
-        ? <div>ㄱㄷ</div>
-        : props.list.map(post => <Link key={post.id} to={"/posts/" + post.id}>{post.title}</Link>)
-
+    if (!list) {
+        list = <div>ㄱㄷ</div>
+    } else if (list === 'NONE') {
+        list = <div>글 없음</div>
+    } else {
+        list = list.map(post => {
+            return (
+                <p key={post.id}>
+                    <Link to={"/posts/" + post.id}>{post.title}</Link>
+                </p>
+            )
+        })
+    }
+    
     return (
         <div className="PostList">
             {

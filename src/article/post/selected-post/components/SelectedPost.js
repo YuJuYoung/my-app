@@ -16,6 +16,8 @@ const Selected = (props) => {
                 : <div>
                     <h2>{post.title}</h2>
                     <p>{post.desc}</p>
+                    <p>{post.product_name}</p>
+                    <p>{post.price}</p>
                 </div>
             }
         </div>

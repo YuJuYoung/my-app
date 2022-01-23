@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const db = require('../db')
 
-router.get('/list', (req, res) => {
+router.get('/', (req, res) => {
     db.query('SELECT id, title FROM post', (err, result) => {
         if (err) {
             return next(err)
@@ -14,12 +14,25 @@ router.get('/list', (req, res) => {
 })
 
 router.get('/:postId', (req, res) => {
-    db.query('SELECT * FROM post WHERE id=?', [req.params.postId], (err, result) => {
+    db.query(
+        'SELECT * FROM post WHERE id=?',
+        [req.params.postId],
+        (err, post) => {
         if (err) {
             return next(err)
         }
-        res.json({
-            result: result[0]
+
+        db.query('SELECT * FROM product WHERE post_id=?',
+        [req.params.postId],
+        (err, product) => {
+            if (err) {
+                next(err)
+            }
+
+            res.json({
+                post: post[0],
+                product: product[0]
+            })
         })
     })
 })
@@ -50,10 +63,10 @@ router.post('/create', (req, res) => {
             if (err) {
                 console.log(err)
             }
-            
+            console.log(result)
             db.query(
                 'INSERT INTO product (name, price, user_id, post_id) VALUES (?, ?, ?, ?)',
-                [product.name, product.price, logined_id, 1],
+                [product.name, product.price, logined_id, result.insertId],
                 (err, result) => {
                     if (err) {
                         console.log(err)

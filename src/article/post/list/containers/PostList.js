@@ -10,10 +10,14 @@ export default connect(state => {
 }, dispatch => {
     return {
         initPostList: () => {
-            fetch('/posts/list').then(res => res.json().then(json => {
+            fetch('/posts').then(res => res.json().then(json => {
                 if (json.list) {
                     dispatch(setPostList({
                         list: json.list
+                    }))
+                } else {
+                    dispatch(setPostList({
+                        list: 'NONE'
                     }))
                 }
             }))

@@ -10,14 +10,16 @@ export default connect(state => {
     return {
         initSelectedPost: (postId) => {
             fetch('/posts/' + postId).then(res => res.json().then(json => {
-                var result = json.result;
+                var post = json.post;
+                var product = json.product;
 
                 dispatch(setSelectedPost({
                     post: {
-                        id: result.id,
-                        title: result.title,
-                        desc: result.description,
-                        user_id: result.user_id
+                        id: post.id,
+                        title: post.title,
+                        desc: post.description,
+                        product_name: product.name,
+                        price: product.price
                     }
                 }))
             }))
