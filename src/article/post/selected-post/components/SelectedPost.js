@@ -14,9 +14,8 @@ const Selected = (props) => {
                 !post
                 ? <p>ㄱㄷ</p>
                 : <div>
-                    <p><h2>{post.title}</h2></p>
+                    <h2>{post.title}</h2>
                     <p>{post.desc}</p>
-                    <p>{post.tag}</p>
                 </div>
             }
         </div>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 const Nav = (props) => {
     const items = props.items;
     const logined = props.logined;
+    const logined_nickname = props.logined_nickname;
 
     const list = items.map(item =>
         <li key={item.value}>
@@ -19,7 +20,10 @@ const Nav = (props) => {
         <div className='Nav'>
             {
                 logined
-                ? <button onClick={e => logout(e)}>로그아웃</button>
+                ? <div>
+                    <p>{logined_nickname}</p>
+                    <button onClick={e => logout(e)}>로그아웃</button>
+                </div>
                 : <Link to="/users/login">로그인</Link>
             }
             <ul>{list}</ul>

@@ -8,16 +8,15 @@ export default connect(state => {
     }
 }, dispatch => {
     return {
-        onSubmit: (title, desc, tag, logined_id) => {
+        onSubmit: (post, product, logined_id) => {
             fetch('/posts/create', {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    title: title,
-                    desc: desc,
-                    tag: tag,
+                    post: post,
+                    product: product,
                     logined_id: logined_id
                 })
             }).then(res => {

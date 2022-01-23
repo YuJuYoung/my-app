@@ -11,9 +11,11 @@ export default connect(state => {
     return {
         initPostList: () => {
             fetch('/posts/list').then(res => res.json().then(json => {
-                dispatch(setPostList({
-                    list: json.list
-                }))
+                if (json.list) {
+                    dispatch(setPostList({
+                        list: json.list
+                    }))
+                }
             }))
         }
     }

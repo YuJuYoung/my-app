@@ -17,7 +17,6 @@ export default connect(state => {
                         id: result.id,
                         title: result.title,
                         desc: result.description,
-                        tag: result.tag,
                         user_id: result.user_id
                     }
                 }))

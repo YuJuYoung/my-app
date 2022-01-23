@@ -5,7 +5,8 @@ import { setLoginState } from '../../article/user/userSlice'
 export default connect(state => {
     return {
         items: state.nav.items,
-        logined: state.user.logined_id
+        logined: state.user.logined_id,
+        logined_nickname: state.user.logined_nickname
     }
 }, dispatch => {
     return {
