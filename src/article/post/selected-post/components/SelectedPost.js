@@ -14,10 +14,10 @@ const Selected = (props) => {
                 !post
                 ? <p>ㄱㄷ</p>
                 : <div>
-                    <h2>{post.title}</h2>
-                    <p>{post.desc}</p>
-                    <p>{post.product_name}</p>
-                    <p>{post.price}</p>
+                    <h2>제목: {post.title}</h2>
+                    <p>내용: {post.desc}</p>
+                    <p>제품명: {post.product_name}</p>
+                    <p>가격: {post.price}</p>
                 </div>
             }
         </div>
