@@ -2,6 +2,24 @@ const express = require('express')
 const router = express.Router()
 const db = require('../db')
 
+const isLogined = (req) => {
+    var logined_id = req.session.logined_id;
+
+    if (!req.body.logined_id || !logined_id) {
+        return {
+            result: false,
+            message: '로그인 되어있지 않음'
+        }
+    }
+    if (req.body.logined_id !== logined_id) {
+        return {
+            result: false,
+            message: '다시 로그인 바람'
+        }
+    }
+    return { result: true }
+}
+
 router.get('/', (req, res) => {
     db.query('SELECT id, title FROM post', (err, result) => {
         if (err) {
@@ -38,21 +56,16 @@ router.get('/:postId', (req, res) => {
 })
 
 router.post('/create', (req, res) => {
-    var logined_id = req.session.logined_id;
+    var logined = isLogined(req)
 
-    if (!logined_id) {
+    if (!logined.result) {
         res.json({
             result: false,
-            message: '로그인 되어있지 않음'
-        })
-    }
-    if (req.body.logined_id !== logined_id) {
-        res.json({
-            result: false,
-            message: '다시 로그인 바람'
+            message: logined.message
         })
     }
 
+    var logined_id = req.session.logined_id
     var post = req.body.post;
     var product = req.body.product;
 
@@ -63,7 +76,7 @@ router.post('/create', (req, res) => {
             if (err) {
                 console.log(err)
             }
-            console.log(result)
+
             db.query(
                 'INSERT INTO product (name, price, user_id, post_id) VALUES (?, ?, ?, ?)',
                 [product.name, product.price, logined_id, result.insertId],
@@ -78,6 +91,39 @@ router.post('/create', (req, res) => {
             )
         }
     )
+})
+
+router.post('/:postId/delete', (req, res) => {
+    var logined = isLogined(req);
+
+    if (!logined.result) {
+        res.json({
+            result: false,
+            message: logined.message
+        })
+    }
+
+    db.query('SELECT * FROM post WHERE id=?', [req.params.postId], (err, post) => {
+        if (err) {
+            return next(err)
+        }
+
+        if (req.session.logined_id !== post[0].user_id) {
+            res.json({
+                result: false,
+                message: '글쓴이가 아님'
+            })
+        }
+
+        db.query('DELETE FROM post WHERE id=?', [req.params.postId], (err, result) => {
+            if (err) {
+                return next(err)
+            }
+            res.json({
+                result: true
+            })
+        })
+    })
 })
 
 module.exports = router;

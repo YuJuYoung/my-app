@@ -4,7 +4,8 @@ import { setSelectedPost } from '../../postSlice'
 
 export default connect(state => {
     return {
-        post: state.post.selected_post
+        post: state.post.selected_post,
+        logined_id: state.user.logined_id
     }
 }, dispatch => {
     return {
@@ -13,15 +14,39 @@ export default connect(state => {
                 var post = json.post;
                 var product = json.product;
 
-                dispatch(setSelectedPost({
-                    post: {
-                        id: post.id,
-                        title: post.title,
-                        desc: post.description,
-                        product_name: product.name,
-                        price: product.price
-                    }
-                }))
+                if (!post || !product) {
+                    dispatch(setSelectedPost({
+                        post: 'NONE'
+                    }))
+                } else {
+                    dispatch(setSelectedPost({
+                        post: {
+                            id: post.id,
+                            user_id: post.user_id,
+                            title: post.title,
+                            desc: post.description,
+                            product_name: product.name,
+                            price: product.price
+                        }
+                    }))
+                }
+            }))
+        },
+        deletePost: (postId, logined_id) => {
+            fetch('/posts/' + postId + '/delete', {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    logined_id: logined_id
+                })
+            }).then(res => res.json().then(json => {
+                if (!json.result) {
+                    alert(json.message)
+                } else {
+                    alert('성공')
+                }
             }))
         }
     }
