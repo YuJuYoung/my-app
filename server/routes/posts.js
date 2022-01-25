@@ -22,6 +22,7 @@ const isLogined = (req) => {
 
 router.get('/', (req, res) => {
     db.query('SELECT id, title FROM post', (err, result) => {
+        console.log(result)
         if (err) {
             return next(err)
         }
