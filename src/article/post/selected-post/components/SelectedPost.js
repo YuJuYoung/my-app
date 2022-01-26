@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 
 const Selected = (props) => {
     var params = useParams()
@@ -7,7 +7,7 @@ const Selected = (props) => {
     var logined_id = props.logined_id;
 
     if (!post) {
-        props.initSelectedPost(postId);
+        props.initSelectedPost(postId)
     }
 
     if (!post) {
@@ -23,7 +23,7 @@ const Selected = (props) => {
             {
                 post.user_id === logined_id
                 ? <p>
-                    <button>수정</button>
+                    <Link to={"/posts/" + postId + "/update"}>수정</Link>
                     <button onClick={e => props.deletePost(postId, logined_id)}>삭제</button>
                 </p>
                 : null

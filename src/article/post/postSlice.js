@@ -11,7 +11,20 @@ export const postSlice = createSlice({
             state.list = action.payload.list
         },
         setSelectedPost: (state, action) => {
-            state.selected_post = action.payload.post
+            var payload = action.payload;
+            var type = payload.type;
+
+            if (type === 'INIT_POST') {
+                state.selected_post = payload.post
+            } else if (type === 'UPDATE_TITLE') {
+                state.selected_post.title = payload.value
+            } else if (type === 'UPDATE_DESC') {
+                state.selected_post.desc = payload.value
+            } else if (type === 'UPDATE_PRODUCT_NAME') {
+                state.selected_post.product_name = payload.value
+            } else if (type === 'UPDATE_PRICE') {
+                state.selected_post.price = payload.value
+            }
         }
     }
 })

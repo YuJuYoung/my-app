@@ -1,5 +1,5 @@
 const CreateForm = (props) => {
-    const onSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
 
         var logined_id = props.logined_id;
@@ -23,7 +23,7 @@ const CreateForm = (props) => {
 
     return (
         <div className="CreateForm">
-            <form onSubmit={e => onSubmit(e)}>
+            <form onSubmit={e => handleSubmit(e)}>
                 <input type="text" name="title" placeholder="제목"/><br />
                 <textarea name="desc" placeholder="내용"></textarea><br />
                 <input type="text" name="product_name" placeholder="상품명"/><br />

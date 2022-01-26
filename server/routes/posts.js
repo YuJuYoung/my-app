@@ -22,7 +22,6 @@ const isLogined = (req) => {
 
 router.get('/', (req, res) => {
     db.query('SELECT id, title FROM post', (err, result) => {
-        console.log(result)
         if (err) {
             return next(err)
         }
@@ -47,7 +46,6 @@ router.get('/:postId', (req, res) => {
             if (err) {
                 next(err)
             }
-
             res.json({
                 post: post[0],
                 product: product[0]
@@ -125,6 +123,45 @@ router.post('/:postId/delete', (req, res) => {
             })
         })
     })
+})
+
+router.post('/:postId/update', (req, res) => {
+    var logined = isLogined(req)
+
+    if (!logined.result) {
+        res.json({
+            result: false,
+            message: logined.message
+        })
+    } else {
+        var postId = req.params.postId;
+        var post = req.body.post;
+        var product = req.body.product;
+
+        db.query(
+            'UPDATE post SET title=?, description=? WHERE id=?',
+            [post.title, post.desc, postId],
+            (err, result) => {
+                if (err) {
+                    console.log(err)
+                }
+    
+                db.query(
+                    'UPDATE product SET name=?, price=? WHERE post_id=?',
+                    [product.name, product.price, postId],
+                    (err, result) => {
+                        if (err) {
+                            console.log(err)
+                        }
+    
+                        res.json({
+                            result: true
+                        })
+                    }
+                )
+            }
+        )
+    }
 })
 
 module.exports = router;
