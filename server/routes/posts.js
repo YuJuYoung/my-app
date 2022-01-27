@@ -164,4 +164,65 @@ router.post('/:postId/update', (req, res) => {
     }
 })
 
+router.post('/:postId/buy', (req, res) => {
+    var logined = isLogined(req);
+
+    if (!logined.result) {
+        res.json({
+            result: false,
+            message: logined.message
+        })
+    } else {
+        var logined_id = req.session.logined_id;
+        var postId = req.params.postId;
+
+        db.query('SELECT * FROM product WHERE post_id=?', [postId], (err, product) => {
+            if (err) {
+                console.log(err)
+            }
+
+            var product = product[0];
+
+            db.query('SELECT * FROM user WHERE id=?', [logined_id], (err2, user) => {
+                if (err2) {
+                    console.log(err2)
+                }
+
+                var user = user[0];
+                
+                if (user.money < product.price) {
+                    res.json({
+                        result: false,
+                        message: '금액 부족'
+                    })
+                } else {
+                    db.query(
+                        'UPDATE user SET money=? WHERE id=?',
+                        [user.money - product.price, logined_id],
+                        (err3, result) => {
+                            if (err3) {
+                                console.log(err3)
+                            }
+
+                            db.query(
+                                'INSERT INTO transaction (sellor_id, buyer_id, post_id, amount) VALUES (?, ?, ?, ?)',
+                                [product.user_id, logined_id, postId, product.price],
+                                (err4, result) => {
+                                    if (err4) {
+                                        console.log(err4)
+                                    }
+
+                                    res.json({
+                                        result: true
+                                    })
+                                }
+                            )
+                        }
+                    )
+                }
+            })
+        })
+    }
+})
+
 module.exports = router;

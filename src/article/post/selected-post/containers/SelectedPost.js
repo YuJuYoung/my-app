@@ -50,6 +50,23 @@ export default connect(state => {
                     alert('성공')
                 }
             }))
+        },
+        buyProduct: (logined_id, postId) => {
+            fetch('/posts/' + postId + '/buy', {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    logined_id: logined_id
+                })
+            }).then(res => res.json().then(json => {
+                if (!json.result) {
+                    alert(json.message)
+                } else {
+                    alert('성공')
+                }
+            }))
         }
     }
 })(SelectedPost)

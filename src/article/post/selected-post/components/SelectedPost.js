@@ -28,6 +28,11 @@ const Selected = (props) => {
                 </p>
                 : null
             }
+            {
+                logined_id && post.user_id !== logined_id
+                ? <button onClick={e => props.buyProduct(logined_id, postId)}>구매</button>
+                : null
+            }
         </div>
     }
 
