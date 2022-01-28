@@ -3,6 +3,7 @@ import titleReducer from './title/titleSlice'
 import navReducer from './nav/navSlice'
 import postReducer from './article/post/postSlice'
 import userReducer from './article/user/userSlice'
+import transactionSlice from './article/transaction/transactionSlice'
 
 
 export default configureStore({
@@ -10,6 +11,7 @@ export default configureStore({
       title: titleReducer,
       nav: navReducer,
       user: userReducer,
-      post: postReducer
+      post: postReducer,
+      transaction: transactionSlice
   },
 })

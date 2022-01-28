@@ -22,7 +22,8 @@ const Nav = (props) => {
                 logined
                 ? <div>
                     <p>{logined_nickname}</p>
-                    <button onClick={e => logout(e)}>로그아웃</button>
+                    <button onClick={e => logout(e)}>로그아웃</button><br />
+                    <Link to="/transactions">거래 목록</Link>
                 </div>
                 : <Link to="/users/login">로그인</Link>
             }
