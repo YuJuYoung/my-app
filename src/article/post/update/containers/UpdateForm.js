@@ -34,6 +34,12 @@ export default connect(state => {
                 }
             }))
         },
+        removeSelectedPost: () => {
+            dispatch(setSelectedPost({
+                type: 'INIT_POST',
+                post: null
+            }))
+        },
         onSubmit: (post, product, logined_id, postId) => {
             fetch('/posts/' + postId + '/update', {
                 method: 'post',

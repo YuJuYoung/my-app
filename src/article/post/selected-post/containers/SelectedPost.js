@@ -34,6 +34,12 @@ export default connect(state => {
                 }
             }))
         },
+        removeSelectedPost: () => {
+            dispatch(setSelectedPost({
+                type: 'INIT_POST',
+                post: null
+            }))
+        },
         deletePost: (postId, logined_id) => {
             fetch('/posts/' + postId + '/delete', {
                 method: 'post',

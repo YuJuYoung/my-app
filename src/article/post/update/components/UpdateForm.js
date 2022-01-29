@@ -1,17 +1,30 @@
+import React from 'react'
 import { useParams } from 'react-router-dom'
 
 const UpdateForm = (props) => {
-    var params = useParams();
-    var postId = params.postId;
-    var post = props.post;
-    var form;
+    const params = useParams()
 
-    if (!post) {
-        props.initSelectedPost(postId)
+    return (
+        <div className='UpdateForm'>
+            <WrappedUpdateForm params={params} received={props}/>
+        </div>
+    )
+}
+
+class WrappedUpdateForm extends React.Component {
+    componentDidMount() {
+        this.props.received.initSelectedPost(this.props.params.postId)
     }
 
-    const handleSubmit = e => {
+    componentWillUnmount() {
+        this.props.received.removeSelectedPost()
+    }
+
+    handleSubmit(e) {
         e.preventDefault()
+
+        var props = this.props.received;
+        var postId = this.props.params.postId
 
         props.onSubmit(
             {
@@ -27,33 +40,40 @@ const UpdateForm = (props) => {
         )
     }
 
-    if (!post) {
-        form = <div>ㄱㄷ</div>
-    } else if (post === 'NONE') {
-        form = <div>없는 글</div>
-    } else {
-        form = <form onSubmit={e => handleSubmit(e)}>
-            <input type="text" name="title" placeholder="제목" value={post.title} onChange={
-                e => props.changeTitle(e.target.value)
-            }/><br />
-            <textarea name="desc" placeholder="내용" value={post.desc} onChange={
-                e => props.changeDESC(e.target.value)
-            }></textarea><br />
-            <input type="text" name="product_name" placeholder="상품명" value={post.product_name} onChange={
-                e => props.changeProductName(e.target.value)
-            }/><br />
-            <input type="number" name="price" placeholder="가격" value={post.price} onChange={
-                e => props.changePrice(e.target.value)
-            }/><br />
-            <input type="submit" value="제출"/>
-        </form>
-    }
+    render() {
+        var props = this.props.received;
 
-    return (
-        <div className="UpdateForm">
-            {form}
-        </div>
-    )
+        var post = props.post;
+        var form;
+    
+        if (!post) {
+            form = <div>ㄱㄷ</div>
+        } else if (post === 'NONE') {
+            form = <div>없는 글</div>
+        } else {
+            form = <form onSubmit={e => this.handleSubmit(e)}>
+                <input type="text" name="title" placeholder="제목" value={post.title} onChange={
+                    e => props.changeTitle(e.target.value)
+                }/><br />
+                <textarea name="desc" placeholder="내용" value={post.desc} onChange={
+                    e => props.changeDESC(e.target.value)
+                }></textarea><br />
+                <input type="text" name="product_name" placeholder="상품명" value={post.product_name} onChange={
+                    e => props.changeProductName(e.target.value)
+                }/><br />
+                <input type="number" name="price" placeholder="가격" value={post.price} onChange={
+                    e => props.changePrice(e.target.value)
+                }/><br />
+                <input type="submit" value="제출"/>
+            </form>
+        }
+
+        return (
+            <div className="form">
+                {form}
+            </div>
+        )
+    }
 }
 
 export default UpdateForm

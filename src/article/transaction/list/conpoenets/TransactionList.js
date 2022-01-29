@@ -20,7 +20,9 @@ export default class TransactionList extends React.Component {
             list = list.map((transaction) => {
                 return (
                     <p key={transaction.id}>
-                        {transaction.amount}
+                        {transaction.amount}<br />
+                        <button onClick={e => {}}>수락</button>
+                        <button onClick={e => {}}>거절</button>
                     </p>
                 )
             })

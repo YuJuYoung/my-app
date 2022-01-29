@@ -8,7 +8,7 @@ const Article = (props) => {
         <div className='Article'>
             <Routes>
                 <Route exac path="/" element={<div className='default'>ㅇㅅㅇ</div>}/>
-                <Route path="/posts/*" element={<Post />}/>
+                <Route path="/posts/*" element={<Post />} />
                 <Route path="/users/*" element={<User />}/>
                 <Route path="/transactions/*" element={<Transaction />}/>
             </Routes>
