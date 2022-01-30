@@ -9,6 +9,11 @@ export default class TransactionList extends React.Component {
         this.props.removeList()
     }
 
+    handleAccept(e, transaction_id) {
+        e.preventDefault()
+        this.props.onAccept(transaction_id, this.props.logined_id)
+    }
+
     render() {
         var list = this.props.list;
 
@@ -21,7 +26,7 @@ export default class TransactionList extends React.Component {
                 return (
                     <p key={transaction.id}>
                         {transaction.amount}<br />
-                        <button onClick={e => {}}>수락</button>
+                        <button onClick={e => {this.handleAccept(e, transaction.id)}}>수락</button>
                         <button onClick={e => {}}>거절</button>
                     </p>
                 )
