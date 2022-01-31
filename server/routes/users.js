@@ -17,7 +17,10 @@ router.post('/login', (req, res) => {
                 res.json({
                     result: true,
                     id: user.id,
-                    nickname: user.nickname
+                    user: {
+                        nickname: user.nickname,
+                        money: user.money
+                    }
                 })
             })
         } else {

@@ -6,7 +6,7 @@ export default connect(state => {
     return {
         items: state.nav.items,
         logined: state.user.logined_id,
-        logined_nickname: state.user.logined_nickname
+        logined_user: state.user.user
     }
 }, dispatch => {
     return {

@@ -4,7 +4,7 @@ export const userSlice = createSlice({
     name: "user",
     initialState: {
         logined_id: null,
-        logined_nickname: null
+        user: null
     },
     reducers: {
         setLoginState: (state, action) => {
@@ -12,10 +12,10 @@ export const userSlice = createSlice({
 
             if (payload.type === 'LOGIN') {
                 state.logined_id = payload.id;
-                state.logined_nickname = payload.nickname;
+                state.user = payload.user;
             } else {
                 state.logined_id = null;
-                state.logined_nickname = null;
+                state.user = null;
             }
         }
     }

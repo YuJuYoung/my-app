@@ -20,7 +20,7 @@ export default connect(null, dispatch => {
                         dispatch(setLoginState({
                             type: 'LOGIN',
                             id: json.id,
-                            nickname: json.nickname
+                            user: json.user
                         }))
                     } else {
                         alert(json.message)
