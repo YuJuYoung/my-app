@@ -127,6 +127,56 @@ router.post('/:transactionId/accept', (req, res) => {
     }
 })
 
+router.post('/:transactionId/reject', (req, res) => {
+    var logined = isLogined(req)
+
+    if (!logined.result) {
+        res.json({
+            result: false,
+            message: logined.message
+        })
+    } else {
+        db.query('SELECT * FROM transaction WHERE id=?', [req.params.transactionId], (err, transaction) => {
+            if (err) {
+                console.log(err)
+            }
+            var transaction = transaction[0];
+
+            db.query('SELECT money FROM user WHERE id=?', [transaction.buyer_id], (err2, user_money) => {
+                if (err2) {
+                    console.log(err2)
+                }
+
+                var user_money = user_money[0].money
+
+                db.query(
+                    'DELETE FROM transaction WHERE id=?',
+                    [transaction.id],
+                    (err3, result) => {
+                        if (err3) {
+                            console.log(err3)
+                        }
+
+                        db.query(
+                            'UPDATE user SET money=? WHERE id=?',
+                            [user_money + transaction.amount, transaction.buyer_id],
+                            (err4, result) => {
+                                if (err4) {
+                                    console.log(err4)
+                                }
+
+                                res.json({
+                                    result: true
+                                })
+                            }
+                        )
+                    }
+                )
+            })
+        })
+    }
+})
+
 const isLogined = (req) => {
     var logined_id = req.session.logined_id;
 

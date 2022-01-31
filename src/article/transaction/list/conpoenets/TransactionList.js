@@ -14,6 +14,11 @@ export default class TransactionList extends React.Component {
         this.props.onAccept(transaction_id, this.props.logined_id)
     }
 
+    handleReject(e, transaction_id) {
+        e.preventDefault()
+        this.props.onReject(transaction_id, this.props.logined_id)
+    }
+
     render() {
         var list = this.props.list;
 
@@ -27,7 +32,7 @@ export default class TransactionList extends React.Component {
                     <p key={transaction.id}>
                         {transaction.amount}<br />
                         <button onClick={e => {this.handleAccept(e, transaction.id)}}>수락</button>
-                        <button onClick={e => {}}>거절</button>
+                        <button onClick={e => {this.handleReject(e, transaction.id)}}>거절</button>
                     </p>
                 )
             })

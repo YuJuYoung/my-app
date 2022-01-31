@@ -59,6 +59,23 @@ export default connect(state => {
                     fetchList(logined_id, dispatch)
                 }
             }))
+        },
+        onReject: (transaction_id, logined_id) => {
+            fetch('/transactions/' + transaction_id + '/reject', {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    logined_id: logined_id
+                })
+            }).then(res => res.json().then(json => {
+                if (json.result) {
+                    fetchList(logined_id, dispatch)
+                } else {
+                    alert(json.message)
+                }
+            }))
         }
     }
 })(TransactionList)
