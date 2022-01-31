@@ -81,18 +81,18 @@ router.post('/:transactionId/accept', (req, res) => {
                                             }
 
                                             db.query(
-                                                'SELECT moeny FROM user WHERE id=?',
+                                                'SELECT money FROM user WHERE id=?',
                                                 [transaction.buyer_id],
-                                                (err5, buyer) => {
+                                                (err5, buyer_money) => {
                                                     if (err5) {
                                                         console.log('err5:', err5)
                                                     }
 
-                                                    var buyer = buyer[0]
+                                                    var buyer_money = buyer_money[0].money;
 
                                                     db.query(
                                                         'UPDATE user SET money=? WHERE id=?',
-                                                        [buyer.money + accepted.amount, transaction.buyer_id],
+                                                        [buyer_money + accepted.amount, transaction.buyer_id],
                                                         (err6, result) => {
                                                             if (err6) {
                                                                 console.log(err6)
