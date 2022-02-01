@@ -17,9 +17,17 @@ export const userSlice = createSlice({
                 state.logined_id = null;
                 state.user = null;
             }
+        },
+        setUserState: (state, action) => {
+            var payload = action.payload;
+            var type = payload.type
+
+            if (type === 'ADD_MONEY') {
+                state.user.money += payload.money
+            }
         }
     }
 })
 
-export const { setLoginState } = userSlice.actions
+export const { setLoginState, setUserState } = userSlice.actions
 export default userSlice.reducer

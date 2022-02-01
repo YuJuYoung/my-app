@@ -3,6 +3,24 @@ const router = express.Router()
 
 const db = require('../db')
 
+const isLogined = (req) => {
+    var logined_id = req.session.logined_id;
+
+    if (!req.body.logined_id || !logined_id) {
+        return {
+            result: false,
+            message: '로그인 되어있지 않음'
+        }
+    }
+    if (req.body.logined_id !== logined_id) {
+        return {
+            result: false,
+            message: '다시 로그인 바람'
+        }
+    }
+    return { result: true }
+}
+
 router.post('/login', (req, res) => {
     db.query('SELECT * FROM user WHERE email=?', [req.body.email], (err, user) => {
         if (err) {
@@ -55,6 +73,48 @@ router.post('/create', (req, res) => {
             })
         }
     )
+})
+
+router.post('/:userId/charge_money', (req, res) => {
+    var logined = isLogined(req)
+
+    if (!logined.result) {
+        res.json({
+            result: false,
+            message: logined.message
+        })
+    } else {
+        var logined_id = req.session.logined_id
+
+        if (logined_id !== parseInt(req.params.userId)) {
+            res.json({
+                result: false,
+                message: '비정상적인 접근'
+            })
+        } else {
+            db.query('SELECT money FROM user WHERE id=?', [logined_id], (err, user_money) => {
+                if (err) {
+                    return next(err, req, res)
+                }
+    
+                var user_money = user_money[0].money
+    
+                db.query(
+                    'UPDATE user SET money=? WHERE id=?',
+                    [user_money + req.body.money, logined_id],
+                    (err2, result) => {
+                        if (err2) {
+                            return next(err2, req, res)
+                        }
+    
+                        res.json({
+                            result: true
+                        })
+                    }
+                )
+            })
+        }
+    }
 })
 
 module.exports = router;
